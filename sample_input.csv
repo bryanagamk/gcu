@@ -1,0 +1,6 @@
+﻿kode_ID,usia_current_year,jenis_kelamin,sistole,diastole,map_current_year,bmi_current_year,lingkar_perut_current_year,glukosa_puasa_current_year,glukosa_2_jpp_current_year,cholesterol_current_year,hdl_current_year,ldl_current_year,trigliserida_current_year,cvd_risk_current_year,skor_stress_current_year,kategori_stress_current_year,kreatinin,gpr,ureum,riwayat_merokok,riwayat_olahraga
+1,56,L,110,80,90,21.75546853,79,227,323,190,28,128,144,4.571428571,39,TINGGI,2.2,70,30,Tidak,Ya teratur seminggu 3x
+2,56,L,150,90,110,27.14158239,90,91,353,164,45,94,126,21,,,3,85,20,Ya ringan (1-5 btg/hari),Ya seminggu <3x
+3,56,L,170,100,123.3333333,26.57312925,96,123,105,214,48,151,89,3.1,,,1.5,90,80,Ya Sedang (6-10 btg/hari),Tidak
+4,56,L,100,70,80,24.44180209,95,88,141,218,42,156,210,5.2,,,6,45,100,Tidak,Tidak
+5,56,L,100,60,73.33333333,24.62443311,83,107,96,251,51,190,185,4.9,,,4,88,35,Ya Sangat Berat (>15 btg/hari),Tidak
