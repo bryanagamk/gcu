@@ -2,6 +2,7 @@ import json
 import sys
 import gspread
 import pandas as pd
+import numpy as np
 from oauth2client.service_account import ServiceAccountCredentials
 
 def get_read_input_csv(path):
@@ -62,35 +63,28 @@ def get_hipertensi_ref(records_data):
         
     return list_ref
 
-def item_check_int(item, curr, data, result):
+def item_check(item, curr, data, result):
     
     if str(data[f"{item}_max"]) == "max":
         if curr[item] > data[f"{item}_min"]:
             result[f"{item}_lvl"] = 5
     else:
-        if curr[item] in range(int(data[f"{item}_min"]), int(data[f"{item}_max"])):
-            print(item)
-            print(curr[item])
-            print(data[f"{item}_min"])
-            print(data[f"{item}_max"])
-            print("level:", data["level"])
-            result[f"{item}_lvl"] = data["level"]
+        print(item)
+        print(curr[item])
+        print(float(data[f"{item}_min"]))
+        print(float(data[f"{item}_max"]))
+        total = np.arange(float(data[f"{item}_min"]), float(data[f"{item}_max"]), 0.1)
+        # convert to float16
+        dataset = np.linspace(float(data[f"{item}_min"]), float(data[f"{item}_max"]), len(total), endpoint=False, retstep=False, dtype=np.float16)
+        
+        value = np.where(dataset==curr[item])
+        
+        if len(value[0]) == 0 :
+            print("level [none]: -")
+            return result
             
-    return result
-
-def item_check_float(item, curr, data, result):
-    
-    if str(data[f"{item}_max"]) == "max":
-        if curr[item] > data[f"{item}_min"]:
-            result[f"{item}_lvl"] = 5
-    else:
-        if curr[item] in range(int(data[f"{item}_min"]), int(data[f"{item}_max"])):
-            print(item)
-            print(curr[item])
-            print(data[f"{item}_min"])
-            print(data[f"{item}_max"])
-            print("level:", data["level"])
-            result[f"{item}_lvl"] = data["level"]
+        print("level [updated]:", data["level"])
+        result[f"{item}_lvl"] = data["level"]
             
     return result
 
@@ -99,14 +93,14 @@ def get_level_status(params, curr, ref):
     level_status = {
         "sistole_lvl": 0,
         "diastole_lvl": 0,
-        "kreatinin_lvl": 0, # belum terhandle
+        "kreatinin_lvl": 0,
         "gpr_lvl": 0,
         "ureum_lvl": 0,
     }
     
     for data in ref:
         for param in params:
-            result = item_check_int(param, curr, data, level_status)
+            result = item_check(param, curr, data, level_status)
             level_status = result
         
         # dst ..
