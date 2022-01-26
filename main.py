@@ -21,8 +21,11 @@ if __name__ == '__main__':
     params_scale = ['sistole', 'diastole', 'kreatinin', 'gpr', 'ureum']
     
     # get current status dynamic (belum)
-    # path = "sample_input.csv"
-    # current_items = util.get_current_status(params, path)
+    path = "sample_input.csv"
+    current_items = util.get_current_status(params, path)
+    print(current_items)
+    
+    # items = util.pre_processing_data(current_items) # belum 
     
     level_status = util.get_level_status(params_scale, current_hipertensi_item, ref_data)
     print(level_status)

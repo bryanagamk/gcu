@@ -117,11 +117,39 @@ def get_hipertensi_result(params):
 
 def get_current_status(params, path):
 
-    df = pd.read_csv(path, engine='python', usecols=params)
-    # currents = []
-    # for row in df.iterrows():
-    #     current = row[1]
-    #     currents.append(current)
+    data = pd.read_csv(path, engine='python', usecols=params)
+    df = pd.DataFrame(data)
+    list_dict = []
 
-    # print(currents)
-    return df
+    for index, row in list(df.iterrows()):
+        list_dict.append(dict(row))
+
+    return list_dict
+
+def pre_processing_data(params): # belum selesai
+    print(type(params))
+    list_items = []
+    list_key = []
+    list_value = []
+    for index, param_dict in params:
+        for key, value in param_dict.items():
+            item = {
+                # "index": index,
+                "name": key,
+                "value": value,
+                "type": 0
+            }
+            # list_key.append(key)
+            # list_value.append(value)
+            
+    # for p in params:
+    #     index = p['index']
+    #     item = {
+    #         "index": index,
+    #         "name": list_key[index],
+    #         "value": list_value[index],
+    #         "type": 0,
+    #     }
+    #     list_items.append(item)
+    # # print(list_key)
+    # print(list_items)
